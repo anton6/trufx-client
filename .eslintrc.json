@@ -1,0 +1,15 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  },
+  "settings": {
+    "import/extensions": [
+      ".js", ".jsx"
+    ]
+  },
+  "extends": "airbnb",
+  "rules": {
+    "function-paren-newline": 0
+  }
+}

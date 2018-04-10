@@ -5,9 +5,10 @@ import createReducer from './reducers';
 import createWebSocketMiddleware from './middlewares/webSocketsMiddleware';
 import sockets from './api/sockets';
 
+// TODO: Handle connection problems, i.e. connection loss/failure,
+// at the moment we just keep attempting to reconnect
 const socketMiddleware = createWebSocketMiddleware({
-  // prevent from automatic connection to the socket
-  [sockets.truefx.id]: io(sockets.truefx.url).disconnect(),
+  [sockets.rates.id]: io(sockets.rates.url),
 });
 
 export default function configureStore({ initialState = {}, history }) {

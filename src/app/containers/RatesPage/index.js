@@ -9,23 +9,23 @@ import injectReducer from '../../utils/injectReducer';
 import RatesPage from './RatesPage';
 
 import {
-  connectToTruefx,
-  disconnectFromTruefx,
+  subscribeToTruefx,
+  unsubscribeFromTruefx,
 } from './actions';
 
 const SubsribedFxRatesPage =
   lifecycle({
     componentDidMount() {
-      this.props.connectToTruefx();
+      this.props.subscribeToTruefx();
     },
     componentWillUnmount() {
-      this.props.disconnectFromTruefx();
+      this.props.unsubscribeFromTruefx();
     },
   })(RatesPage);
 
 const mapDispatchToProps = ({
-  connectToTruefx,
-  disconnectFromTruefx,
+  subscribeToTruefx,
+  unsubscribeFromTruefx,
 });
 
 const withReducer = injectReducer({ key: STORE_KEY, reducer });

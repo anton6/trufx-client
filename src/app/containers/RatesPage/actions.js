@@ -1,14 +1,14 @@
 import { createAction } from 'redux-actions';
 import sockets from '../../api/sockets';
 import {
-  INTENT_CONNECT,
-  INTENT_DISCONNECT,
+  INTENT_JOIN_ROOM,
+  INTENT_LEAVE_ROOM,
 } from '../../middlewares/webSocketsMiddleware';
 import {
   SELECTED_RATES_ON_CHANGE,
   TRUEFX_DATA_SUCCESS,
-  CONNECT_TO_TRUEFX,
-  DISCONNECT_FROM_TRUEFX,
+  SUBSCRIBE_TO_TRUEFX,
+  UNSUBSCRIBE_FROM_TRUEFX,
 } from './actionTypes';
 
 const currencyPairsOnChange =
@@ -17,22 +17,25 @@ const currencyPairsOnChange =
 const truefxDataSuccess =
   createAction(TRUEFX_DATA_SUCCESS, rates => ({ rates }));
 
-const connectToTruefx =
-  createAction(CONNECT_TO_TRUEFX, undefined, () => ({
-    websocket: sockets.truefx.id,
-    intent: INTENT_CONNECT,
-    event: sockets.truefx.event,
+const subscribeToTruefx =
+  createAction(SUBSCRIBE_TO_TRUEFX, undefined, () => ({
+    websocket: sockets.rates.id,
+    intent: INTENT_JOIN_ROOM,
+    room: sockets.rates.rooms.truefx.name,
+    event: sockets.rates.rooms.truefx.event,
     onEvent: truefxDataSuccess,
   }));
 
-const disconnectFromTruefx =
-  createAction(DISCONNECT_FROM_TRUEFX, undefined, () => ({
-    websocket: sockets.truefx.id,
-    intent: INTENT_DISCONNECT,
+const unsubscribeFromTruefx =
+  createAction(UNSUBSCRIBE_FROM_TRUEFX, undefined, () => ({
+    websocket: sockets.rates.id,
+    intent: INTENT_LEAVE_ROOM,
+    room: sockets.rates.rooms.truefx.name,
+    event: sockets.rates.rooms.truefx.event,
   }));
 
 export {
   currencyPairsOnChange,
-  connectToTruefx,
-  disconnectFromTruefx,
+  subscribeToTruefx,
+  unsubscribeFromTruefx,
 };

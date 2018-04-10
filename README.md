@@ -12,4 +12,4 @@ Exampe of React Client App obtaining Exchange Rates from [TrueFX Market Data Web
 ## Project includes
 - Code splitting
 - Dynamic redux store injection
-- Redux Middleware for handling socket connections
+- Redux Middleware for handling socket connections, reconnections after downtime.
